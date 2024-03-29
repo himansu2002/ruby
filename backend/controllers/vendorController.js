@@ -3,6 +3,12 @@
 const Vendor = require('../models/Vendor');
 const jwt=require('jsonwebtoken');
 const bcrypt=require('bcryptjs');
+const dotenv=require('dotenv');
+
+dotenv.config();
+
+const secretKey=process.env.whatisyourname;
+
 
 
 
@@ -43,8 +49,10 @@ const vendorlogin = async (req, res) => {
        if(!vendor || !(await bcrypt.compare(password, vendor.password))){
            return res.status(401).json({msg: "invalid enail or password"});
     }
-    res.status(200).json({msg: "Login Successfull", });
-    console.log("Login Successfull");
+
+    const token = jwt.sign({vendorid: vendor._id},secretKey, {expiresIn: '1h'} )
+    res.status(200).json({msg: "Login Successfull", token});
+    console.log("Login Successfull",token);
 }
 catch(error){
     console.error(error);
