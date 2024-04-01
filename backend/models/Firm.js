@@ -31,6 +31,12 @@ const firmSchema = new mongoose.Schema({
             ref: 'Vendor'
         }
 
+    ],
+    product:[
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Firm'
+        }
     ]
 
 });
