@@ -32,7 +32,7 @@ const firmSchema = new mongoose.Schema({
         }
 
     ],
-    product:[
+    products:[
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Firm'
