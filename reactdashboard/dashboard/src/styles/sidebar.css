@@ -1,0 +1,17 @@
+.sidebarsection{
+    border: 1px solid black;
+    background-color: rgba(61, 70, 86, 0.641);
+    width: 100%;
+    max-width: 18%;
+    height: 83vh;
+    padding-top: 10px;
+}
+
+.sidebarsection ul li{
+
+    list-style: none;
+    margin-bottom: 20px;
+    font-weight:600;
+    cursor: pointer;
+    
+}
