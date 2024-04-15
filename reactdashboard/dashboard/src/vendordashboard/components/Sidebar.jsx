@@ -1,13 +1,13 @@
 import React from 'react'
 import '/src/styles/sidebar.css'
 
-const Sidebar = () => {
+const Sidebar = ({showFirmHandler, showProductHandler}) => {
   return (
     <div className='sidebarsection'>
       <ul>
         <li>user details</li>
-        <li>Add firm</li>
-        <li>Add product</li>
+        <li onClick={showFirmHandler}>Add firm</li>
+        <li onClick={showProductHandler}>Add product</li>
         <li>All products</li>
       </ul>
     </div>

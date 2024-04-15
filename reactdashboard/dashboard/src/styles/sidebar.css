@@ -1,17 +1,42 @@
-.sidebarsection{
-    border: 1px solid black;
-    background-color: rgba(61, 70, 86, 0.641);
+.sidebarsection {
+    border: 0.1px solid  rgba(98, 123, 169, 0.641);
+    border-radius: 5px;
+    background-color: rgba(112, 138, 185, 0.641);
     width: 100%;
     max-width: 18%;
-    height: 83vh;
+    height: 80vh;
     padding-top: 10px;
+    box-shadow: 3px 3px 5px #68709f7b, -5px -5px 10px #2a27c735;            /* Add a shadow effect */
 }
 
-.sidebarsection ul li{
-
+.sidebarsection ul li {
     list-style: none;
     margin-bottom: 20px;
-    font-weight:600;
+    font-weight: 600;
     cursor: pointer;
+    transition: background-color 0.3s; /* Smooth transition effect */
+}
+
+.sidebarsection ul li:hover {
+    background-color: rgba(176, 198, 239, 0);
+    box-shadow: 3px 3px 5px #68709f46, -5px -5px 10px #cccce91e;
+    border-radius: 10px;
+    font-size: 17px; 
+    transition-delay: 0.1s;
+}
+
+/* 
+@media (max-width: 768px) {
+    .sidebarsection {
+        flex-direction: column;
+        width: 100%;
+        max-width: 97%;
+        height: fit-content;
+        padding: 10px;
+
+
+        
+    }
     
 }
+*/

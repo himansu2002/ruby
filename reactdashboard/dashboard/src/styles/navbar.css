@@ -1,12 +1,29 @@
-.navsection{
+.navsection {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
     height: 80px;
     width: 100%;
     background-color: rgb(21, 93, 208);
     color: rgb(255, 255, 255);
     padding: 20px;
     font-size: large;
+    max-width: 97%;
+    
 }
+
+/* 
+@media (max-width: 768px) {
+    .navsection {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+        max-width: 97%;
+    }
+}
+
+
+.navsection:hover {
+    background-color: rgb(16, 71, 161);
+}
+*/
