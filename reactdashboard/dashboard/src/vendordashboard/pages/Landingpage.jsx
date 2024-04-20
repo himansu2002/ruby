@@ -6,18 +6,21 @@ import Login from '../components/forms/Login';
 import Register from '../components/forms/Register';
 import Addfirm from '../components/forms/Addfirm';
 import Addproduct from '../components/forms/Addproduct';
+import Welcome from '../components/Welcome';
 
 const Landingpage = () => {
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
   const [showFirm, setShowFirm] = useState(false);
   const [showProduct, setShowProduct] = useState(false);
+  const [showWelcome, setShowWelcome] = useState(false);
 
   const showLoginHandler = () => {
     setShowLogin(true);
     setShowRegister(false);
     setShowFirm(false);
     setShowProduct(false);
+    setShowWelcome(false);
   };
 
   const showRegisterHandler = () => {
@@ -25,6 +28,7 @@ const Landingpage = () => {
     setShowLogin(false);
     setShowFirm(false);
     setShowProduct(false);
+    setShowWelcome(false);
   };
 
   const showFirmHandler = () => {
@@ -32,6 +36,8 @@ const Landingpage = () => {
     setShowRegister(false);
     setShowLogin(false);
     setShowProduct(false);
+    setShowWelcome(false);
+
   };
 
   const showProductHandler = () => {
@@ -39,6 +45,14 @@ const Landingpage = () => {
     setShowFirm(false);
     setShowLogin(false);
     setShowRegister(false);
+    setShowWelcome(false);
+  }
+  const showWelcomeHandler = () => {
+    setShowProduct(false);
+    setShowFirm(false);
+    setShowLogin(false);
+    setShowRegister(false);
+    setShowWelcome(true);
   }
 
   return (
@@ -47,10 +61,11 @@ const Landingpage = () => {
         <Navbar showLoginHandler={showLoginHandler} showRegisterHandler={showRegisterHandler} />
         <div className='collection'>
           <Sidebar showFirmHandler={showFirmHandler} showProductHandler={showProductHandler} />
-          {showLogin && <Login />}
-          {showRegister && <Register />}
+          {showLogin && <Login showWelcomeHandler = {showWelcomeHandler}/>}
+          {showRegister && <Register showLoginHandler = {showLoginHandler}/>}
           {showFirm && <Addfirm />}
           {showProduct && <Addproduct/>}
+          {showWelcome && <Welcome/>}
         </div>
       </section>
     </>

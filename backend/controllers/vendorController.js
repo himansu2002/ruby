@@ -35,7 +35,7 @@ const vendorRegister = async (req, res) => {
     }
     catch(error){
         console.error(error);
-        req.status(500).json({error: "internal error"})
+        res.status(500).json({error: error.message});
     }
 }
 
@@ -47,7 +47,7 @@ const vendorlogin = async (req, res) => {
        const vendor= await Vendor.findOne({email});
 
        if(!vendor || !(await bcrypt.compare(password, vendor.password))){
-           return res.status(401).json({msg: "invalid enail or password"});
+           return res.status(401).json({msg: "invalid email or password"});
     }
 
     const token = jwt.sign({vendorid: vendor._id},secretKey, {expiresIn: '1h'} )
@@ -56,7 +56,7 @@ const vendorlogin = async (req, res) => {
 }
 catch(error){
     console.error(error);
-    req.status(500).json({error: "internal error"})
+    res.status(500).json({error: "internal error"})
 }
 }
 
@@ -69,7 +69,7 @@ const getAllVendors = async (req, res) => {
 }
 catch(error){
     console.log(error);
-    req.status(500).json({error: "internal error"});
+    res.status(500).json({error: "internal error"});
     
 }
 }
@@ -86,7 +86,7 @@ const getvendorbyid = async (req, res) => {
     }
 catch(error){
     console.log(error);
-    req.status(500).json({error: "internal error"});
+    res.status(500).json({error: "internal error"});
 }
 }
 

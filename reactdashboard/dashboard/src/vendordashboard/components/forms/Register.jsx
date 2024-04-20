@@ -1,20 +1,18 @@
 import React,{useState} from 'react'
 import '/src/styles/register.css'
-import { API_URL } from '../../data/Apipath';
 
 
-const Register = () => {
+const Register = ({showLoginHandler}) => {
 const [username, setUsername] = useState('');
 const [email, setEmail] = useState('');
 const [password, setPassword] = useState('');
-const [error, setError] = useState('');
-const [loading, setLoading] = useState(true);
 
 
-const handleSubmit = async(e) => {
+
+const handleSubmit = async (e) => {
   e.preventDefault();
   try {
-    const response = await fetch(`${API_URL}/vendor/register`, {
+    const response = await fetch('http://localhost:4000/vendor/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -26,16 +24,21 @@ const handleSubmit = async(e) => {
       })
     });
 
-      const data = await response.json();
-      if (response.ok) {
-        console.log(data);
-        alert("Registration successful");
+    const data = await response.json();
+    if (response.ok) {
+      console.log(data);
+      setUsername('');
+      setEmail('');
+      setPassword('');
+      showLoginHandler();
+      alert("Registration successful");
     }
   } catch (error) {
     console.error("Error:", error);
     alert("Registration failed");
   }
 }
+
 
   return (
     <div className='registersection'>
