@@ -1,6 +1,7 @@
 const firm = require('../models/Firm');
 const Vendor = require('../models/Vendor');
 const multer = require('multer');
+const Path = require('path');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -22,6 +23,11 @@ const addfirm = async (req, res) => {
 
         if (!vendor) {
             return res.status(404).json({ error: 'Vendor not found' });
+
+        }
+
+        if(vendor.firm.length >= 1){
+            return res.status(400).json({ error: 'Firm already exists' });
         }
 
         const newFirm = new firm({
@@ -35,9 +41,11 @@ const addfirm = async (req, res) => {
 
         const savedFirm = await newFirm.save();
 
+        const firmid =savedFirm._id
+
         vendor.firm.push(savedFirm);
         await vendor.save();
-        return res.status(201).json({ message: 'Firm added successfully' });
+        return res.status(201).json({ message: 'Firm added successfully',firmid });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Internal server error' });
@@ -51,6 +59,7 @@ const deletefirmByid = async (req, res) => {
         if (!deletedfirm) {
             return res.status(404).json({ error: 'Firm not found' });
         }
+       
         
     } catch (error) {
         console.error(error);

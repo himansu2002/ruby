@@ -9,17 +9,16 @@ const firmSchema = new mongoose.Schema({
     area: {
         type: String,
         required: true
-        
     },
     category: {
         type: [
             {
-            type: String,
-            enum : ['Wholesale', 'Retail' ]
+                type: String,
+                enum: ['Wholesale', 'Retail']
             }
         ]
     },
-    offer:{
+    offer: {
         type: String,
     },
     image: {
@@ -32,10 +31,10 @@ const firmSchema = new mongoose.Schema({
         }
 
     ],
-    products:[
+    products: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Firm'
+            ref: 'Product' 
         }
     ]
 

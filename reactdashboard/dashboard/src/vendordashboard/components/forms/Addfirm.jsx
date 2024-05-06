@@ -15,13 +15,12 @@ const Addfirm = () => {
     } else {
       setCategory([...category, value]);
     }
-  }
+  };
 
   const handleImageUpload = (e) => {
     const selectedImage = e.target.files[0];
     setFile(selectedImage);
-  }
-
+  };
 
   const handleFirmsubmit = async (e) => {
     e.preventDefault();
@@ -29,6 +28,7 @@ const Addfirm = () => {
       const loginToken = localStorage.getItem("logintoken");
       if (!loginToken) {
         console.error("Please login first");
+        return;
       }
 
       const formData = new FormData();
@@ -37,12 +37,15 @@ const Addfirm = () => {
       formData.append('offer', offer);
 
       category.forEach((category) => {
-        formData.append('category', category);
+        formData.append('category[]', category);
       });
+
+      formData.append('image', file);
+
       const response = await fetch('http://localhost:4000/firm/addfirm', {
         method: 'POST',
         headers: {
-          'tokien': `${loginToken}`
+          'token': `${loginToken}`
         },
         body: formData
       });
@@ -55,8 +58,17 @@ const Addfirm = () => {
         setOffer('');
         setFile(null);
       }
+      else if(data.message == "Firm already exists"){
+        alert("Firm already exists");
+      }else{
+        alert("Failed to add firm");
+      }
+      console.log(data.firmid);
+      const firmid = data.firmid;
+      localStorage.setItem('firmid', firmid);
     } catch (error) {
       console.error(error);
+      alert('Failed to add firm');
     }
   };
 
@@ -72,9 +84,9 @@ const Addfirm = () => {
           <label>category</label><br/>
           <div className="checkbox-container" ><br/>
             <label>wholesale</label>
-            <input type="checkbox" checked={category.includes('wholesale')} value="wholesale" onChange={handleCategoryChange}/><br/>
+            <input type="checkbox" checked={category.includes('Wholesale')} value="Wholesale" onChange={handleCategoryChange}/><br/>
             <label>retail</label>
-            <input type="checkbox" checked={category.includes('retail')} value="retail"  onChange={handleCategoryChange}/><br/>
+            <input type="checkbox" checked={category.includes('Retail')} value="Retail"  onChange={handleCategoryChange}/><br/>
           </div>
         </div>
         <label>offer</label><br/>

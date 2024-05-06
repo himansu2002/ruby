@@ -12,7 +12,7 @@ const productSchema = new mongoose.Schema({
         type: [
             {
             type: String,
-            enum : ['tinture', 'Biochemics' ]
+            enum : ['Tinture', 'Biochemics' ]
             }
         ]
     },
